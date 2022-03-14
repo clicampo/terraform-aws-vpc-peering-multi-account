@@ -11,8 +11,9 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws.accepter"></a> [aws.accepter](#provider\_aws.accepter) | >= 2.0 |
-| <a name="provider_aws.requester"></a> [aws.requester](#provider\_aws.requester) | >= 2.0 |
+| <a name="provider_aws.accepter"></a> [aws.accepter](#provider\_aws.accepter) | 4.5.0 |
+| <a name="provider_aws.requester"></a> [aws.requester](#provider\_aws.requester) | 4.5.0 |
+| <a name="provider_vault"></a> [vault](#provider\_vault) | 3.3.1 |
 
 ## Modules
 
@@ -42,20 +43,21 @@
 | [aws_subnet_ids.requester](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet_ids) | data source |
 | [aws_vpc.accepter](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
 | [aws_vpc.requester](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
+| [vault_aws_access_credentials.accepter_creds](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/data-sources/aws_access_credentials) | data source |
+| [vault_aws_access_credentials.requester_creds](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/data-sources/aws_access_credentials) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_accepter_account_id"></a> [accepter\_account\_id](#input\_accepter\_account\_id) | Requester AWS Account ID | `string` | `""` | no |
 | <a name="input_accepter_allow_remote_vpc_dns_resolution"></a> [accepter\_allow\_remote\_vpc\_dns\_resolution](#input\_accepter\_allow\_remote\_vpc\_dns\_resolution) | Allow accepter VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the requester VPC | `bool` | `true` | no |
-| <a name="input_accepter_aws_access_key"></a> [accepter\_aws\_access\_key](#input\_accepter\_aws\_access\_key) | Access key id to use in accepter account | `string` | `null` | no |
 | <a name="input_accepter_aws_assume_role_arn"></a> [accepter\_aws\_assume\_role\_arn](#input\_accepter\_aws\_assume\_role\_arn) | Accepter AWS Assume Role ARN | `string` | `null` | no |
 | <a name="input_accepter_aws_profile"></a> [accepter\_aws\_profile](#input\_accepter\_aws\_profile) | Profile used to assume accepter\_aws\_assume\_role\_arn | `string` | `""` | no |
-| <a name="input_accepter_aws_secret_key"></a> [accepter\_aws\_secret\_key](#input\_accepter\_aws\_secret\_key) | Secret access key to use in accepter account | `string` | `null` | no |
-| <a name="input_accepter_aws_token"></a> [accepter\_aws\_token](#input\_accepter\_aws\_token) | Session token for validating temporary credentials | `string` | `null` | no |
 | <a name="input_accepter_enabled"></a> [accepter\_enabled](#input\_accepter\_enabled) | Flag to enable/disable the accepter side of the peering connection | `bool` | `true` | no |
 | <a name="input_accepter_region"></a> [accepter\_region](#input\_accepter\_region) | Accepter AWS region | `string` | n/a | yes |
 | <a name="input_accepter_subnet_tags"></a> [accepter\_subnet\_tags](#input\_accepter\_subnet\_tags) | Only add peer routes to accepter VPC route tables of subnets matching these tags | `map(string)` | `{}` | no |
+| <a name="input_accepter_vault_assume_role_name"></a> [accepter\_vault\_assume\_role\_name](#input\_accepter\_vault\_assume\_role\_name) | role | `string` | `""` | no |
 | <a name="input_accepter_vpc_id"></a> [accepter\_vpc\_id](#input\_accepter\_vpc\_id) | Accepter VPC ID filter | `string` | `""` | no |
 | <a name="input_accepter_vpc_tags"></a> [accepter\_vpc\_tags](#input\_accepter\_vpc\_tags) | Accepter VPC Tags filter | `map(string)` | `{}` | no |
 | <a name="input_add_attribute_tag"></a> [add\_attribute\_tag](#input\_add\_attribute\_tag) | If `true` will add additional attribute tag to the requester and accceptor resources | `bool` | `true` | no |
@@ -75,20 +77,20 @@
 | <a name="input_name"></a> [name](#input\_name) | ID element. Usually the component or solution name, e.g. 'app' or 'jenkins'.<br>This is the only ID element not also included as a `tag`.<br>The "name" tag is set to the full `id` string. There is no tag with the value of the `name` input. | `string` | `null` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | ID element. Usually an abbreviation of your organization name, e.g. 'eg' or 'cp', to help ensure generated IDs are globally unique | `string` | `null` | no |
 | <a name="input_regex_replace_chars"></a> [regex\_replace\_chars](#input\_regex\_replace\_chars) | Terraform regular expression (regex) string.<br>Characters matching the regex will be removed from the ID elements.<br>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | `null` | no |
+| <a name="input_requester_account_id"></a> [requester\_account\_id](#input\_requester\_account\_id) | Requester AWS Account ID | `string` | `""` | no |
 | <a name="input_requester_allow_remote_vpc_dns_resolution"></a> [requester\_allow\_remote\_vpc\_dns\_resolution](#input\_requester\_allow\_remote\_vpc\_dns\_resolution) | Allow requester VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the accepter VPC | `bool` | `true` | no |
-| <a name="input_requester_aws_access_key"></a> [requester\_aws\_access\_key](#input\_requester\_aws\_access\_key) | Access key id to use in requester account | `string` | `null` | no |
 | <a name="input_requester_aws_assume_role_arn"></a> [requester\_aws\_assume\_role\_arn](#input\_requester\_aws\_assume\_role\_arn) | Requester AWS Assume Role ARN | `string` | n/a | yes |
 | <a name="input_requester_aws_profile"></a> [requester\_aws\_profile](#input\_requester\_aws\_profile) | Profile used to assume requester\_aws\_assume\_role\_arn | `string` | `""` | no |
-| <a name="input_requester_aws_secret_key"></a> [requester\_aws\_secret\_key](#input\_requester\_aws\_secret\_key) | Secret access key to use in requester account | `string` | `null` | no |
-| <a name="input_requester_aws_token"></a> [requester\_aws\_token](#input\_requester\_aws\_token) | Session token for validating temporary credentials | `string` | `null` | no |
 | <a name="input_requester_region"></a> [requester\_region](#input\_requester\_region) | Requester AWS region | `string` | n/a | yes |
 | <a name="input_requester_subnet_tags"></a> [requester\_subnet\_tags](#input\_requester\_subnet\_tags) | Only add peer routes to requester VPC route tables of subnets matching these tags | `map(string)` | `{}` | no |
+| <a name="input_requester_vault_assume_role_name"></a> [requester\_vault\_assume\_role\_name](#input\_requester\_vault\_assume\_role\_name) | role | `string` | `""` | no |
 | <a name="input_requester_vpc_id"></a> [requester\_vpc\_id](#input\_requester\_vpc\_id) | Requester VPC ID filter | `string` | `""` | no |
 | <a name="input_requester_vpc_tags"></a> [requester\_vpc\_tags](#input\_requester\_vpc\_tags) | Requester VPC Tags filter | `map(string)` | `{}` | no |
 | <a name="input_skip_metadata_api_check"></a> [skip\_metadata\_api\_check](#input\_skip\_metadata\_api\_check) | Don't use the credentials of EC2 instance profile | `bool` | `false` | no |
 | <a name="input_stage"></a> [stage](#input\_stage) | ID element. Usually used to indicate role, e.g. 'prod', 'staging', 'source', 'build', 'test', 'deploy', 'release' | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`).<br>Neither the tag keys nor the tag values will be modified by this module. | `map(string)` | `{}` | no |
 | <a name="input_tenant"></a> [tenant](#input\_tenant) | ID element \_(Rarely used, not included by default)\_. A customer identifier, indicating who this instance of a resource is for | `string` | `null` | no |
+| <a name="input_vault_role"></a> [vault\_role](#input\_vault\_role) | Vault role used to retrieve AWS credentials | `string` | `""` | no |
 
 ## Outputs
 

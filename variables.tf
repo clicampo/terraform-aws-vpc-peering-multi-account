@@ -10,12 +10,6 @@ variable "accepter_enabled" {
   default     = true
 }
 
-variable "accepter_aws_access_key" {
-  description = "Access key id to use in accepter account"
-  type        = string
-  default     = null
-}
-
 variable "accepter_aws_profile" {
   description = "Profile used to assume accepter_aws_assume_role_arn"
   type        = string
@@ -24,18 +18,6 @@ variable "accepter_aws_profile" {
 
 variable "accepter_aws_assume_role_arn" {
   description = "Accepter AWS Assume Role ARN"
-  type        = string
-  default     = null
-}
-
-variable "accepter_aws_secret_key" {
-  description = "Secret access key to use in accepter account"
-  type        = string
-  default     = null
-}
-
-variable "accepter_aws_token" {
-  description = "Session token for validating temporary credentials"
   type        = string
   default     = null
 }
@@ -79,4 +61,22 @@ variable "add_attribute_tag" {
   type        = bool
   default     = true
   description = "If `true` will add additional attribute tag to the requester and accceptor resources"
+}
+
+variable "vault_role" {
+  type        = string
+  default     = ""
+  description = "Vault role used to retrieve AWS credentials"
+}
+
+variable "accepter_vault_assume_role_name" {
+  type        = string
+  default     = ""
+  description = "role"
+}
+
+variable "accepter_account_id" {
+  type        = string
+  default     = ""
+  description = "Requester AWS Account ID"
 }

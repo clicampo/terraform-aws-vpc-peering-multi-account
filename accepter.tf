@@ -1,4 +1,14 @@
 # Accepter's credentials
+
+data "vault_aws_access_credentials" "accepter_creds" {
+  backend  = "aws"
+  type     = "sts"
+  ttl      = 3600
+  role_arn = "arn:aws:iam::${var.accepter_account_id}:role/${var.accepter_vault_assume_role_name}"
+
+  role = var.vault_role
+}
+
 provider "aws" {
   alias                   = "accepter"
   region                  = var.accepter_region
@@ -12,9 +22,9 @@ provider "aws" {
     }
   }
 
-  access_key = var.accepter_aws_access_key
-  secret_key = var.accepter_aws_secret_key
-  token      = var.accepter_aws_token
+  access_key = data.vault_aws_access_credentials.accepter_creds.access_key
+  secret_key = data.vault_aws_access_credentials.accepter_creds.secret_key
+  token      = data.vault_aws_access_credentials.accepter_creds.security_token
 }
 
 module "accepter" {

@@ -4,27 +4,9 @@ variable "requester_aws_profile" {
   default     = ""
 }
 
-variable "requester_aws_access_key" {
-  description = "Access key id to use in requester account"
-  type        = string
-  default     = null
-}
-
 variable "requester_aws_assume_role_arn" {
   description = "Requester AWS Assume Role ARN"
   type        = string
-}
-
-variable "requester_aws_secret_key" {
-  description = "Secret access key to use in requester account"
-  type        = string
-  default     = null
-}
-
-variable "requester_aws_token" {
-  description = "Session token for validating temporary credentials"
-  type        = string
-  default     = null
 }
 
 variable "requester_region" {
@@ -56,7 +38,29 @@ variable "requester_allow_remote_vpc_dns_resolution" {
   description = "Allow requester VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the accepter VPC"
 }
 
+variable "requester_vault_assume_role_name" {
+  type        = string
+  default     = ""
+  description = "role"
+}
+
+variable "requester_account_id" {
+  type        = string
+  default     = ""
+  description = "Requester AWS Account ID"
+}
+
 # Requestors's credentials
+
+data "vault_aws_access_credentials" "requester_creds" {
+  backend  = "aws"
+  type     = "sts"
+  ttl      = 3600
+  role_arn = "arn:aws:iam::${var.requester_account_id}:role/${var.requester_vault_assume_role_name}"
+
+  role = var.vault_role
+}
+
 provider "aws" {
   alias                   = "requester"
   region                  = var.requester_region
@@ -70,9 +74,9 @@ provider "aws" {
     }
   }
 
-  access_key = var.requester_aws_access_key
-  secret_key = var.requester_aws_secret_key
-  token      = var.requester_aws_token
+  access_key = data.vault_aws_access_credentials.requester_creds.access_key
+  secret_key = data.vault_aws_access_credentials.requester_creds.secret_key
+  token      = data.vault_aws_access_credentials.requester_creds.security_token
 
 }
 
