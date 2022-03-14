@@ -30,7 +30,7 @@ variable "requester_allow_remote_vpc_dns_resolution" {
 variable "requester_vault_assume_role_name" {
   type        = string
   default     = ""
-  description = "role"
+  description = "Requester AWS role name"
 }
 
 variable "requester_account_id" {

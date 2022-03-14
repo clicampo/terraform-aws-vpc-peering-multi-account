@@ -60,7 +60,7 @@ variable "vault_role" {
 variable "accepter_vault_assume_role_name" {
   type        = string
   default     = ""
-  description = "role"
+  description = "Accepter AWS role name"
 }
 
 variable "accepter_account_id" {
