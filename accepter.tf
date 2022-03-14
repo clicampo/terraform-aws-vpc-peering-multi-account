@@ -12,15 +12,7 @@ data "vault_aws_access_credentials" "accepter_creds" {
 provider "aws" {
   alias                   = "accepter"
   region                  = var.accepter_region
-  profile                 = var.accepter_aws_profile
   skip_metadata_api_check = var.skip_metadata_api_check
-
-  dynamic "assume_role" {
-    for_each = local.enabled && var.accepter_aws_assume_role_arn != "" ? ["true"] : []
-    content {
-      role_arn = var.accepter_aws_assume_role_arn
-    }
-  }
 
   access_key = data.vault_aws_access_credentials.accepter_creds.access_key
   secret_key = data.vault_aws_access_credentials.accepter_creds.secret_key

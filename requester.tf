@@ -1,14 +1,3 @@
-variable "requester_aws_profile" {
-  description = "Profile used to assume requester_aws_assume_role_arn"
-  type        = string
-  default     = ""
-}
-
-variable "requester_aws_assume_role_arn" {
-  description = "Requester AWS Assume Role ARN"
-  type        = string
-}
-
 variable "requester_region" {
   type        = string
   description = "Requester AWS region"
@@ -64,15 +53,7 @@ data "vault_aws_access_credentials" "requester_creds" {
 provider "aws" {
   alias                   = "requester"
   region                  = var.requester_region
-  profile                 = var.requester_aws_profile
   skip_metadata_api_check = var.skip_metadata_api_check
-
-  dynamic "assume_role" {
-    for_each = local.enabled && var.requester_aws_assume_role_arn != "" ? ["true"] : []
-    content {
-      role_arn = var.requester_aws_assume_role_arn
-    }
-  }
 
   access_key = data.vault_aws_access_credentials.requester_creds.access_key
   secret_key = data.vault_aws_access_credentials.requester_creds.secret_key

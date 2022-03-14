@@ -10,18 +10,6 @@ variable "accepter_enabled" {
   default     = true
 }
 
-variable "accepter_aws_profile" {
-  description = "Profile used to assume accepter_aws_assume_role_arn"
-  type        = string
-  default     = ""
-}
-
-variable "accepter_aws_assume_role_arn" {
-  description = "Accepter AWS Assume Role ARN"
-  type        = string
-  default     = null
-}
-
 variable "accepter_region" {
   type        = string
   description = "Accepter AWS region"

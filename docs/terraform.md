@@ -52,8 +52,6 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_accepter_account_id"></a> [accepter\_account\_id](#input\_accepter\_account\_id) | Requester AWS Account ID | `string` | `""` | no |
 | <a name="input_accepter_allow_remote_vpc_dns_resolution"></a> [accepter\_allow\_remote\_vpc\_dns\_resolution](#input\_accepter\_allow\_remote\_vpc\_dns\_resolution) | Allow accepter VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the requester VPC | `bool` | `true` | no |
-| <a name="input_accepter_aws_assume_role_arn"></a> [accepter\_aws\_assume\_role\_arn](#input\_accepter\_aws\_assume\_role\_arn) | Accepter AWS Assume Role ARN | `string` | `null` | no |
-| <a name="input_accepter_aws_profile"></a> [accepter\_aws\_profile](#input\_accepter\_aws\_profile) | Profile used to assume accepter\_aws\_assume\_role\_arn | `string` | `""` | no |
 | <a name="input_accepter_enabled"></a> [accepter\_enabled](#input\_accepter\_enabled) | Flag to enable/disable the accepter side of the peering connection | `bool` | `true` | no |
 | <a name="input_accepter_region"></a> [accepter\_region](#input\_accepter\_region) | Accepter AWS region | `string` | n/a | yes |
 | <a name="input_accepter_subnet_tags"></a> [accepter\_subnet\_tags](#input\_accepter\_subnet\_tags) | Only add peer routes to accepter VPC route tables of subnets matching these tags | `map(string)` | `{}` | no |
@@ -79,8 +77,6 @@
 | <a name="input_regex_replace_chars"></a> [regex\_replace\_chars](#input\_regex\_replace\_chars) | Terraform regular expression (regex) string.<br>Characters matching the regex will be removed from the ID elements.<br>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | `null` | no |
 | <a name="input_requester_account_id"></a> [requester\_account\_id](#input\_requester\_account\_id) | Requester AWS Account ID | `string` | `""` | no |
 | <a name="input_requester_allow_remote_vpc_dns_resolution"></a> [requester\_allow\_remote\_vpc\_dns\_resolution](#input\_requester\_allow\_remote\_vpc\_dns\_resolution) | Allow requester VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the accepter VPC | `bool` | `true` | no |
-| <a name="input_requester_aws_assume_role_arn"></a> [requester\_aws\_assume\_role\_arn](#input\_requester\_aws\_assume\_role\_arn) | Requester AWS Assume Role ARN | `string` | n/a | yes |
-| <a name="input_requester_aws_profile"></a> [requester\_aws\_profile](#input\_requester\_aws\_profile) | Profile used to assume requester\_aws\_assume\_role\_arn | `string` | `""` | no |
 | <a name="input_requester_region"></a> [requester\_region](#input\_requester\_region) | Requester AWS region | `string` | n/a | yes |
 | <a name="input_requester_subnet_tags"></a> [requester\_subnet\_tags](#input\_requester\_subnet\_tags) | Only add peer routes to requester VPC route tables of subnets matching these tags | `map(string)` | `{}` | no |
 | <a name="input_requester_vault_assume_role_name"></a> [requester\_vault\_assume\_role\_name](#input\_requester\_vault\_assume\_role\_name) | role | `string` | `""` | no |
