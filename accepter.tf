@@ -52,7 +52,7 @@ data "aws_vpc" "accepter" {
 # Lookup accepter subnets
 data "aws_subnets" "accepter" {
   count    = local.count
-  provider = aws.requester
+  provider = aws.accepter
 
   filter {
     name   = "vpc-id"
